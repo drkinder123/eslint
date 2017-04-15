@@ -13,7 +13,7 @@ const assert = require("assert"),
     EventEmitter = require("events").EventEmitter,
     fs = require("fs"),
     path = require("path"),
-    eslint = require("../../../lib/eslint"),
+    Linter = require("../../../lib/Linter"),
     EventGeneratorTester = require("../../../lib/testers/event-generator-tester"),
     debug = require("../../../lib/code-path-analysis/debug-helpers"),
     CodePath = require("../../../lib/code-path-analysis/code-path"),
@@ -27,6 +27,7 @@ const assert = require("assert"),
 
 const expectedPattern = /\/\*expected\s+((?:.|[\r\n])+?)\s*\*\//g;
 const lineEndingPattern = /\r?\n/g;
+const eslint = new Linter();
 
 /**
  * Extracts the content of `/*expected` comments from a given source code.

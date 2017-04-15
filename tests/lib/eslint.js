@@ -34,7 +34,7 @@ function compatRequire(name, windowName) {
 const assert = compatRequire("chai").assert,
     sinon = compatRequire("sinon"),
     path = compatRequire("path"),
-    eslint = compatRequire("../../lib/eslint", "eslint");
+    Linter = compatRequire("../../lib/Linter", "eslint");
 
 //------------------------------------------------------------------------------
 // Constants
@@ -42,6 +42,8 @@ const assert = compatRequire("chai").assert,
 
 const TEST_CODE = "var answer = 6 * 7;",
     BROKEN_TEST_CODE = "var;";
+
+const eslint = new Linter();
 
 //------------------------------------------------------------------------------
 // Helpers
@@ -81,6 +83,7 @@ describe("eslint", () => {
 
     afterEach(() => {
         eslint.reset();
+        eslint.rules.testReset();
         sandbox.verifyAndRestore();
     });
 

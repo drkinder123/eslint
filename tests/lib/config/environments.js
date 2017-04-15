@@ -17,20 +17,21 @@ const assert = require("chai").assert,
 //------------------------------------------------------------------------------
 
 describe("Environments", () => {
+    const environments = new Environments();
 
     describe("load()", () => {
 
         it("should have all default environments loaded", () => {
             Object.keys(envs).forEach(envName => {
-                assert.deepEqual(Environments.get(envName), envs[envName]);
+                assert.deepEqual(environments.get(envName), envs[envName]);
             });
         });
 
         it("should have all default environments loaded after being cleared", () => {
-            Environments.testReset();
+            environments.testReset();
 
             Object.keys(envs).forEach(envName => {
-                assert.deepEqual(Environments.get(envName), envs[envName]);
+                assert.deepEqual(environments.get(envName), envs[envName]);
             });
         });
     });
@@ -38,15 +39,15 @@ describe("Environments", () => {
     describe("define()", () => {
 
         afterEach(() => {
-            Environments.testReset();
+            environments.testReset();
         });
 
         it("should add an environment with the given name", () => {
             const env = { globals: { foo: true } };
 
-            Environments.define("foo", env);
+            environments.define("foo", env);
 
-            const result = Environments.get("foo");
+            const result = environments.get("foo");
 
             assert.deepEqual(result, env);
         });
@@ -55,7 +56,7 @@ describe("Environments", () => {
     describe("importPlugin()", () => {
 
         afterEach(() => {
-            Environments.testReset();
+            environments.testReset();
         });
 
         it("should import all environments from a plugin object", () => {
@@ -70,10 +71,10 @@ describe("Environments", () => {
                 }
             };
 
-            Environments.importPlugin(plugin, "plugin");
+            environments.importPlugin(plugin, "plugin");
 
-            const fooEnv = Environments.get("plugin/foo"),
-                barEnv = Environments.get("plugin/bar");
+            const fooEnv = environments.get("plugin/foo"),
+                barEnv = environments.get("plugin/bar");
 
             assert.deepEqual(fooEnv, plugin.environments.foo);
             assert.deepEqual(barEnv, plugin.environments.bar);

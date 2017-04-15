@@ -1,9 +1,9 @@
-var eslint = require("../../lib/eslint"),
+var Linter = require("../../lib/Linter"),
     fs = require("fs");
 
 var config = require("../../conf/eslint-recommended");
 
-var large = fs.readFileSync(__dirname + "/large.js", "utf8"), 
+var large = fs.readFileSync(__dirname + "/large.js", "utf8"),
     medium = fs.readFileSync(__dirname + "/medium.js", "utf8"),
     small = fs.readFileSync(__dirname + "/small.js", "utf8");
 
@@ -12,6 +12,7 @@ var runs = {
     medium: medium,
     small: small
 };
+var eslint = new Linter();
 
 benchmark.runs = runs;
 benchmark(Boolean, 1);

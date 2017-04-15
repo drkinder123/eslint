@@ -14,7 +14,7 @@ const fs = require("fs"),
     espree = require("espree"),
     sinon = require("sinon"),
     leche = require("leche"),
-    eslint = require("../../../lib/eslint"),
+    Linter = require("../../../lib/Linter"),
     SourceCode = require("../../../lib/util/source-code"),
     astUtils = require("../../../lib/ast-utils");
 
@@ -29,7 +29,7 @@ const DEFAULT_CONFIG = {
     range: true,
     loc: true
 };
-
+const eslint = new Linter();
 const AST = espree.parse("let foo = bar;", DEFAULT_CONFIG),
     TEST_CODE = "var answer = 6 * 7;",
     SHEBANG_TEST_CODE = `#!/usr/bin/env node\n${TEST_CODE}`;

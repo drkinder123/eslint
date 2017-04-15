@@ -13,7 +13,7 @@ const assert = require("chai").assert,
     sinon = require("sinon"),
     espree = require("espree"),
     astUtils = require("../../lib/ast-utils"),
-    eslint = require("../../lib/eslint"),
+    Linter = require("../../lib/Linter"),
     SourceCode = require("../../lib/util/source-code");
 
 //------------------------------------------------------------------------------
@@ -27,6 +27,7 @@ const ESPREE_CONFIG = {
     range: true,
     loc: true
 };
+const eslint = new Linter();
 
 describe("ast-utils", () => {
     const filename = "filename.js";
